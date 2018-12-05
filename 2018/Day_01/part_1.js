@@ -1,7 +1,7 @@
 const input = require('./input');
 
-var frequency = 0;
-input.forEach((change)=>{
-  frequency += (+change);
+let frequency = input.reduce((add, curr)=>{
+  return (+add) + (+curr);
 });
+
 console.log('Final frequency:', frequency);
