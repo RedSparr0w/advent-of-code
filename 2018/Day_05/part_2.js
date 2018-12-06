@@ -1,5 +1,7 @@
 let input = require('./input');
 
+console.time('Execution Time');
+
 let alphabet =  'abcdefghijklmnopqrstuvwxyz'.split('');
 let lowestLength = input.length;
 for(i = 0; i < alphabet.length; i++){
@@ -14,4 +16,5 @@ for(i = 0; i < alphabet.length; i++){
     lowestLength = tempInput.length;
 }
 
+console.timeEnd('Execution Time');
 console.log('Final length:', lowestLength);
