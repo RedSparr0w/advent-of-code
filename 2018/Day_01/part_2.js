@@ -2,7 +2,7 @@ const input = require('./input');
 
 var frequency_history = new Set([0]);
 
-function get_first_duplicate(start_frequency, tries = 1){
+function get_first_duplicate(start_frequency = 0, loops = 1){
   var frequency = start_frequency
   var found = input.some((change)=>{
     if (frequency_history.has(frequency += (+change))){
@@ -11,11 +11,11 @@ function get_first_duplicate(start_frequency, tries = 1){
     frequency_history.add(frequency);
     return false;
   });
-  console.log('Tries:', tries);
   if (!found){
-    get_first_duplicate(frequency, tries + 1);
+    return get_first_duplicate(frequency, loops + 1);
   } else {
-    console.log('First duplicate frequency:', frequency);
+    console.log('Total loops:', loops);
+    return frequency;
   }
 }
-get_first_duplicate(0);
+console.log('First duplicate frequency:', get_first_duplicate());
