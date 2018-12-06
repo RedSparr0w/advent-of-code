@@ -1,3 +1,4 @@
+console.time('Input Parse Time');
 module.exports = `+3
 +15
 -1
@@ -991,3 +992,4 @@ module.exports = `+3
 -13
 +4
 +80915`.split('\n');
+console.timeEnd('Input Parse Time');
