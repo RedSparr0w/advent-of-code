@@ -29,38 +29,39 @@ for(distance = 0; distance < max_distance; distance++){
 		const {x, y} = coords[id];
 		for (x_offset = 0; x_offset <= distance; x_offset++){
 			const y_offset = distance - x_offset;
-			if (x - x_offset <= bounds.min_x || x + x_offset >= bounds.max_x || y - y_offset <= bounds.min_y || y + y_offset >= bounds.max_y){
-				continue;
-			}
 			if (!area[x - x_offset]){area[x - x_offset] = {};}
 			if (!area[x + x_offset]){area[x + x_offset] = {};}
 			// spot hasn't been claimed yet, no need to check distance
-			if (!area[x - x_offset][y - y_offset]){
-				area[x - x_offset][y - y_offset] = {id, distance};
-			} else {
-				if (area[x - x_offset][y - y_offset].id != id && area[x - x_offset][y - y_offset].distance == distance){
-					area[x - x_offset][y - y_offset].id = undefined;
+			if (x - x_offset >= bounds.min_x){
+				if (!area[x - x_offset][y - y_offset]){
+					area[x - x_offset][y - y_offset] = {id, distance};
+				} else if (y - y_offset >= bounds.min_y){
+					if (area[x - x_offset][y - y_offset].id != id && area[x - x_offset][y - y_offset].distance == distance){
+						area[x - x_offset][y - y_offset].id = undefined;
+					}
+				}
+				if (!area[x - x_offset][y + y_offset]){
+					area[x - x_offset][y + y_offset] = {id, distance};
+				} else if (y + y_offset <= bounds.max_y){
+					if (area[x - x_offset][y + y_offset].id != id && area[x - x_offset][y + y_offset].distance == distance){
+						area[x - x_offset][y + y_offset].id = undefined;
+					}
 				}
 			}
-			if (!area[x - x_offset][y + y_offset]){
-				area[x - x_offset][y + y_offset] = {id, distance};
-			} else {
-				if (area[x - x_offset][y + y_offset].id != id && area[x - x_offset][y + y_offset].distance == distance){
-					area[x - x_offset][y + y_offset].id = undefined;
+			if (x + x_offset <= bounds.max_x){
+				if (!area[x + x_offset][y - y_offset]){
+					area[x + x_offset][y - y_offset] = {id, distance};
+				} else if (y - y_offset >= bounds.min_y){
+					if (area[x + x_offset][y - y_offset].id != id && area[x + x_offset][y - y_offset].distance == distance){
+						area[x + x_offset][y - y_offset].id = undefined;
+					}
 				}
-			}
-			if (!area[x + x_offset][y - y_offset]){
-				area[x + x_offset][y - y_offset] = {id, distance};
-			} else {
-				if (area[x + x_offset][y - y_offset].id != id && area[x + x_offset][y - y_offset].distance == distance){
-					area[x + x_offset][y - y_offset].id = undefined;
-				}
-			}
-			if (!area[x + x_offset][y + y_offset]){
-				area[x + x_offset][y + y_offset] = {id, distance};
-			} else {
-				if (area[x + x_offset][y + y_offset].id != id && area[x + x_offset][y + y_offset].distance == distance){
-					area[x + x_offset][y + y_offset].id = undefined;
+				if (!area[x + x_offset][y + y_offset]){
+					area[x + x_offset][y + y_offset] = {id, distance};
+				} else if (y + y_offset <= bounds.max_y){
+					if (area[x + x_offset][y + y_offset].id != id && area[x + x_offset][y + y_offset].distance == distance){
+						area[x + x_offset][y + y_offset].id = undefined;
+					}
 				}
 			}
 		}
