@@ -28,7 +28,10 @@ for(distance = 0; distance < max_distance; distance++){
 	for (id in coords){
 		const {x, y} = coords[id];
 		for (x_offset = 0; x_offset <= distance; x_offset++){
-			y_offset = distance - x_offset;
+			const y_offset = distance - x_offset;
+			if (x - x_offset <= bounds.min_x || x + x_offset >= bounds.max_x || y - y_offset <= bounds.min_y || y + y_offset >= bounds.max_y){
+				continue;
+			}
 			if (!area[x - x_offset]){area[x - x_offset] = {};}
 			if (!area[x + x_offset]){area[x + x_offset] = {};}
 			// spot hasn't been claimed yet, no need to check distance
