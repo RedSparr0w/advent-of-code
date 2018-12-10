@@ -341,7 +341,7 @@ position=< 30639, -20180> velocity=<-3,  2>
 position=< 40822,  50932> velocity=<-4, -5>
 position=<-50601,  10292> velocity=< 5, -1>
 position=<-20127, -30341> velocity=< 2,  3>`.split('\n').map((line)=>{
-  [pos_x, pos_y, vel_x, vel_y] = line.match(/(-?\d+)/g).map(Number);
+  const [pos_x, pos_y, vel_x, vel_y] = line.match(/(-?\d+)/g).map(Number);
   return {pos_x, pos_y, vel_x, vel_y};
 });
 console.timeEnd('Input Parse Time');
