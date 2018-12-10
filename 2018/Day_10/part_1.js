@@ -11,10 +11,10 @@ while(smallestBoundingBox >= getBoundingBoxSize(stars)){
 prevPos();
 
 function nextPos(){
-  for(star in stars){
-    stars[star].pos_x += stars[star].vel_x;
-    stars[star].pos_y += stars[star].vel_y;
-  }
+  stars.forEach((star)=>{
+    star.pos_x += star.vel_x;
+    star.pos_y += star.vel_y;
+  });
 }
 
 function prevPos(){
@@ -40,7 +40,7 @@ function getBoundingBoxSize(stars){
   return (max_x - min_x) * (max_y - min_y);
 }
 
-function logText(char = 'X'){
+function logText(char = 'X', blankChar = ' '){
   let x_value = Object.keys(stars).map((star)=>stars[star].pos_x),
       y_value = Object.keys(stars).map((star)=>stars[star].pos_y);
 
@@ -53,7 +53,7 @@ function logText(char = 'X'){
   for (y = 0; y <= max_y - min_y; y++){
     myArr[y] = [];
     for (x = 0; x <= max_x - min_x; x++){
-      myArr[y][x] = ' ';
+      myArr[y][x] = blankChar;
     }
   }
 
@@ -67,4 +67,4 @@ function logText(char = 'X'){
 }
 
 console.timeEnd('Execution Time');
-logText('X');
+logText('X', ' ');
